@@ -1,0 +1,20 @@
+POST http://localhost:3000/graphql
+Content-Type: application/json
+Authorization: Bearer xxx
+X-REQUEST-TYPE: GraphQL
+
+// Get all transports
+query {
+  transports {
+    name
+  }
+}
+
+// create transport
+mutation CreateTransportInput($ep: Episode!, $review: ReviewInput!) {
+  createReview(episode: $ep, review: $review) {
+    stars
+    commentary
+  }
+}
+}

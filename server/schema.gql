@@ -1,0 +1,107 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type LocationType {
+  id: ID!
+  createdBy: String!
+  createdOn: DateTime!
+  latitude: Float
+  longitude: Float
+  locationType: Location_Type!
+  order: Int
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+enum Location_Type {
+  ORIGIN
+  DESTINATION
+  BUSINESS
+  PERSONAL
+  ENDOFLEG
+}
+
+type TransportType {
+  id: ID!
+  createdBy: String!
+  createdOn: DateTime!
+  name: String!
+  description: String
+  departureDate: DateTime!
+  arrivalDate: DateTime
+  locations: [LocationType!]
+}
+
+type ContactType {
+  id: ID!
+  createdBy: String!
+  createdOn: DateTime!
+  contactValue: String!
+  contactType: Contact_Type!
+  primary: Boolean!
+}
+
+enum Contact_Type {
+  CELL
+  HOME
+  FAX
+  WORK
+  HOME_EMAIL
+  WORK_EMAIL
+}
+
+type UserType {
+  id: ID!
+  createdBy: String!
+  createdOn: DateTime!
+  firstName: String!
+  lastName: String!
+  userName: String!
+  contactInfo: [ContactType!]!
+}
+
+input LocationTypeInput {
+  latitude: Float
+  longitude: Float
+  locationType: Location_Type!
+  order: Int
+}
+
+input TransportTypeInput {
+  name: String!
+  description: String
+  departureDate: DateTime!
+  arrivalDate: DateTime
+  locations: [LocationTypeInput!]
+}
+
+input ContactTypeInput {
+  contactValue: String!
+  contactType: Contact_Type!
+  primary: Boolean!
+}
+
+input UserTypeInput {
+  firstName: String!
+  lastName: String!
+  userName: String!
+  contactInfo: [ContactTypeInput!]!
+}
+
+type Query {
+  transports: [TransportType!]!
+  transport(id: ID!): TransportType!
+  users: [UserType!]!
+}
+
+type Mutation {
+  createTransport(createTransportInput: TransportTypeInput!): TransportType!
+  updateTransport(updateTransportInput: TransportTypeInput!): TransportType!
+  removeTransport(id: ID!): TransportType!
+  createUser(createUserInput: UserTypeInput!): UserType!
+  registerUser(createUserInput: UserTypeInput!): UserType!
+}
